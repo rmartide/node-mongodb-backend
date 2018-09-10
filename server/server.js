@@ -63,6 +63,23 @@ app.delete('/todos/:id', (req, res) => {
     });
 });
 
+app.patch('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    var text = req.body.text;
+    if (!ObjectID.isValid(id) || !text) {
+        return res.status(404).send();
+    }
+    Todo.findByIdAndUpdate(id, { text: text}).then((todo) => {
+        if (todo) {
+            res.send(todo);
+        } else {
+            res.status(404).send();
+        }
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
 app.listen(3000, () => {
     console.log('Started on port 3000');
 })
