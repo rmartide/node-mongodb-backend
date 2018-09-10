@@ -19,7 +19,15 @@ app.post('/todos', (req, res) => {
     }, (e) => {
         res.status(400).send(e);
     });
-})
+});
+
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({ todos });
+    }).catch((err) => {
+        res.status(400).send(e);
+    });
+});
 
 app.post('/user', (req, res) => {
     var user = new User({
