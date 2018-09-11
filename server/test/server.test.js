@@ -88,8 +88,8 @@ describe('GET /todos/:id', () => {
             .get(`/todos/${validId}`)
             .expect(200)
             .expect((res) => {
-                expect(res.body.text).toBe(todos[0].text);
-                expect(res.body['_id']).toBe(`${todos[0]['_id']}`);
+                expect(res.body.todo.text).toBe(todos[0].text);
+                expect(res.body.todo._id).toBe(`${todos[0]['_id']}`);
             })
             .end(done);
     });
@@ -117,7 +117,7 @@ describe('DELETE /todos/:id', () => {
             .delete(`/todos/${validId}`)
             .expect(200)
             .expect((res) => {
-                expect(res.body._id).toBe(validId.toHexString());
+                expect(res.body.todo._id).toBe(validId.toHexString());
             })
             .end(done);
     });
